@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gerador de assinatura de email profissional para GB Agritech e GB Consult" />
+    <title>GB Signature Generator</title>
+
+    <!--
+      Favicons: trocam conforme o tema do SO/navegador (prefers-color-scheme).
+
+      Camada 1 — declarativa via media (Safari + futuros browsers):
+        Dois conjuntos com media queries opostas.
+        Browsers que suportam ignoram o conjunto que não se aplica.
+
+      Camada 2 — imperativa via JS (Chrome e demais):
+        useFavicon() em App.jsx usa matchMedia para trocar os hrefs
+        dos links com id="favicon-*" em tempo real, inclusive ao
+        mudar o tema do SO sem recarregar a página.
+    -->
+
+    <!-- ── Light (OS em modo claro) ── -->
+    <link id="favicon-16"    rel="icon"             type="image/png" sizes="16x16"   href="/favicons/light/16px.png"  media="(prefers-color-scheme: light)" />
+    <link id="favicon-32"    rel="icon"             type="image/png" sizes="32x32"   href="/favicons/light/32px.png"  media="(prefers-color-scheme: light)" />
+    <link id="favicon-48"    rel="icon"             type="image/png" sizes="48x48"   href="/favicons/light/48px.png"  media="(prefers-color-scheme: light)" />
+    <link id="favicon-apple" rel="apple-touch-icon" type="image/png" sizes="180x180" href="/favicons/light/180px.png" media="(prefers-color-scheme: light)" />
+    <link id="favicon-192"   rel="icon"             type="image/png" sizes="192x192" href="/favicons/light/192px.png" media="(prefers-color-scheme: light)" />
+
+    <!-- ── Dark (OS em modo escuro) ── -->
+    <link rel="icon"             type="image/png" sizes="16x16"   href="/favicons/dark/16px.png"  media="(prefers-color-scheme: dark)" />
+    <link rel="icon"             type="image/png" sizes="32x32"   href="/favicons/dark/32px.png"  media="(prefers-color-scheme: dark)" />
+    <link rel="icon"             type="image/png" sizes="48x48"   href="/favicons/dark/48px.png"  media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/favicons/dark/180px.png" media="(prefers-color-scheme: dark)" />
+    <link rel="icon"             type="image/png" sizes="192x192" href="/favicons/dark/192px.png" media="(prefers-color-scheme: dark)" />
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
