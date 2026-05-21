@@ -696,22 +696,11 @@ body::before {
   flex-shrink: 0;
 }
 
-.topbar-logo {
-  width: 30px;
-  height: 30px;
+.topbar-logo-horizontal {
+  height: 28px;
+  width: auto;
+  display: block;
   object-fit: contain;
-}
-
-.topbar-brand-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  transition: color var(--transition);
-}
-
-.topbar-brand-name span {
-  color: var(--brand);
 }
 
 .topbar-nav {

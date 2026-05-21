@@ -2,7 +2,7 @@ import ThemeToggle from './ThemeToggle'
 
 /**
  * Topbar — barra de navegação principal.
- * Estruturada para receber mais seções no futuro via props `navItems`.
+ * Logo troca conforme o tema: logo-horizontal (light) / logo-horizontal-white (GB mode).
  */
 
 const DEFAULT_NAV = [
@@ -17,19 +17,28 @@ const DEFAULT_NAV = [
   },
 ]
 
-export default function Topbar({ theme, onToggleTheme, onLogout, activeNav = 'signatures', onNavChange, navItems = DEFAULT_NAV }) {
+export default function Topbar({
+  theme,
+  onToggleTheme,
+  onLogout,
+  activeNav   = 'signatures',
+  onNavChange,
+  navItems    = DEFAULT_NAV,
+}) {
+  const logoSrc = theme === 'gb'
+    ? '/logo-horizontal-white.svg'
+    : '/logo-horizontal.svg'
+
   return (
     <header className="topbar">
-      {/* Esquerda — brand */}
+
+      {/* Esquerda — logo horizontal por tema */}
       <div className="topbar-brand">
         <img
-          src={theme === 'gb' ? '/logo-agritech.svg' : '/logo-agritech.svg'}
+          src={logoSrc}
           alt="GB"
-          className="topbar-logo"
+          className="topbar-logo-horizontal"
         />
-        <span className="topbar-brand-name">
-          GB <span>Tools</span>
-        </span>
       </div>
 
       {/* Centro — navegação */}
@@ -62,6 +71,7 @@ export default function Topbar({ theme, onToggleTheme, onLogout, activeNav = 'si
           Sair
         </button>
       </div>
+
     </header>
   )
 }
