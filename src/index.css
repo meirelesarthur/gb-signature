@@ -442,7 +442,7 @@ body::before {
 }
 
 .preview-scroll {
-  overflow-x: auto;
+  overflow: hidden;
   padding-bottom: 8px;
 }
 
@@ -459,13 +459,13 @@ body::before {
   background: var(--scrollbar-thumb-hover);
 }
 
-/* ── Preview em tamanho real (3× scale via CSS transform) ── */
-/*    O espaço visual = dimensões exportadas: 337×3=1011 × 117×3=351 px.
-      O card dentro continua em 337×117 — o ref e o export não mudam. */
+/* ── Preview em tamanho real (scale dinâmico via ResizeObserver) ── */
+/*    sig-scale-outer ocupa 100% da largura disponível; a altura é
+      definida via inline style pelo React (117 × scale).              */
 .sig-scale-outer {
-  width:  1011px;   /* 337 × 3 */
-  height:  351px;   /* 117 × 3 */
+  width: 100%;
   position: relative;
+  overflow: hidden;   /* sem corte — a altura inline já é exata */
   flex-shrink: 0;
 }
 
@@ -473,8 +473,8 @@ body::before {
   position: absolute;
   top: 0;
   left: 0;
-  transform: scale(3);
   transform-origin: top left;
+  /* transform: scale() é aplicado via inline style pelo React */
 }
 
 /* ── Signature Card (the actual email signature) ── */

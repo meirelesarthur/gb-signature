@@ -97,7 +97,9 @@ export default function App() {
   const [theme, setTheme]           = useState(getInitialTheme)
   const [activeNav, setActiveNav]   = useState('signatures')
 
-  const previewRef = useRef(null)
+  const previewRef      = useRef(null)
+  const containerRef    = useRef(null)
+  const [previewScale, setPreviewScale] = useState(1)
 
   /* Aplica data-theme no <html> */
   useEffect(() => {
@@ -113,6 +115,17 @@ export default function App() {
 
   /* Pré-aquece o cache de assets */
   useEffect(() => { loadAssets().catch(console.warn) }, [])
+
+  /* Calcula a escala do preview para preencher o container sem corte */
+  useEffect(() => {
+    if (!containerRef.current) return
+    const ro = new ResizeObserver(entries => {
+      const w = entries[0].contentRect.width
+      if (w > 0) setPreviewScale(w / 337)
+    })
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [])
 
   const handleToggleTheme = useCallback(() => setTheme(t => t === 'gb' ? 'light' : 'gb'), [])
 
@@ -210,15 +223,16 @@ export default function App() {
             <div className="preview-panel">
               <div className="glass-card">
                 <h2 className="card-title">Preview em tempo real</h2>
-                <div className="preview-scroll">
-                  {/*
-                    .sig-scale-outer define o espaço visual (337×3 = 1011px × 117×3 = 351px).
-                    .sig-scale-inner aplica transform:scale(3) apenas no WRAPPER —
-                    o ref={previewRef} fica no card original (337×117px), então o
-                    export via html-to-image captura sem escala e aplica pixelRatio:3.
-                  */}
-                  <div className="sig-scale-outer">
-                    <div className="sig-scale-inner">
+                {/* containerRef mede a largura disponível para calcular o scale */}
+                <div className="preview-scroll" ref={containerRef}>
+                  <div
+                    className="sig-scale-outer"
+                    style={{ height: `${Math.round(117 * previewScale)}px` }}
+                  >
+                    <div
+                      className="sig-scale-inner"
+                      style={{ transform: `scale(${previewScale})` }}
+                    >
                       <SignaturePreview
                         ref={previewRef}
                         name={values.name}
