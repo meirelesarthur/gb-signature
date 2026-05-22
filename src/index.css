@@ -442,7 +442,8 @@ body::before {
 }
 
 .preview-scroll {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding-bottom: 8px;
 }
 

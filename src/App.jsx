@@ -116,12 +116,12 @@ export default function App() {
   /* Pré-aquece o cache de assets */
   useEffect(() => { loadAssets().catch(console.warn) }, [])
 
-  /* Calcula a escala do preview para preencher o container sem corte */
+  /* Calcula a escala do preview: preenche o container e aplica +30% */
   useEffect(() => {
     if (!containerRef.current) return
     const ro = new ResizeObserver(entries => {
       const w = entries[0].contentRect.width
-      if (w > 0) setPreviewScale(w / 337)
+      if (w > 0) setPreviewScale((w / 337) * 1.3)
     })
     ro.observe(containerRef.current)
     return () => ro.disconnect()

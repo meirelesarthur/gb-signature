@@ -2,32 +2,31 @@ import { forwardRef } from 'react'
 import { Mail, Globe, Link2, AtSign } from 'lucide-react'
 
 /**
- * Config por empresa.
- * Logos em /public → sem CORS taint no export.
- * Ícones via Lucide React → inline SVG, nítidos no PNG exportado.
+ * Dados unificados: ambas as empresas usam os contatos da GB Agritech.
+ * Somente o logo muda de acordo com a seleção.
  */
 const COMPANY_CONFIG = {
   agritech: {
     logo:      '/logo-agritech.svg',
     logoAlt:   'Logo GB Agritech',
-    website:   'www.gbagritech.com',
-    linkedin:  '/gbagritech',
-    instagram: '@gbagritech',
-    emailHint: 'email@gbagritech.com',
   },
   consult: {
     logo:      '/logo-consult.svg',
     logoAlt:   'Logo GB Consult',
-    website:   'www.gbconsult.com.br',
-    linkedin:  '/gbconsult',
-    instagram: '@gbconsult',
-    emailHint: 'email@gbconsult.com.br',
   },
+}
+
+/* Dados de contato fixos — sempre GB Agritech */
+const CONTACT = {
+  website:   'www.gbagritech.com',
+  linkedin:  '/gbagritech',
+  instagram: '@gbagritech',
+  emailHint: 'email@gbagritech.com',
 }
 
 /* Ícones Lucide configurados para a escala da assinatura */
 const ICON_PROPS = {
-  size:        11,
+  size:        10,
   strokeWidth: 1.6,
   color:       '#666',
 }
@@ -43,12 +42,12 @@ const SignaturePreview = forwardRef(function SignaturePreview(
   return (
     <div className="signature-card" ref={ref}>
 
-      {/* ── Lado esquerdo: Logo ── */}
+      {/* ── Lado esquerdo: Logo (muda por empresa) ── */}
       <div className="signature-left">
         <img src={cfg.logo} alt={cfg.logoAlt} crossOrigin="anonymous" />
       </div>
 
-      {/* ── Lado direito: Dados ── */}
+      {/* ── Lado direito: Dados (sempre Agritech) ── */}
       <div className="signature-right">
 
         <p className="signature-name">
@@ -60,19 +59,19 @@ const SignaturePreview = forwardRef(function SignaturePreview(
         <div className="signature-info">
           <div className="signature-row">
             <Mail {...ICON_PROPS} />
-            <span>{email || cfg.emailHint}</span>
+            <span>{email || CONTACT.emailHint}</span>
           </div>
           <div className="signature-row">
             <Globe {...ICON_PROPS} />
-            <span>{cfg.website}</span>
+            <span>{CONTACT.website}</span>
           </div>
           <div className="signature-row">
             <Link2 {...ICON_PROPS} />
-            <span>{cfg.linkedin}</span>
+            <span>{CONTACT.linkedin}</span>
           </div>
           <div className="signature-row">
             <AtSign {...ICON_PROPS} />
-            <span>{cfg.instagram}</span>
+            <span>{CONTACT.instagram}</span>
           </div>
         </div>
 
