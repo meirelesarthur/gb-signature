@@ -44,7 +44,12 @@ const SignaturePreview = forwardRef(function SignaturePreview(
 
       {/* ── Lado esquerdo: Logo (muda por empresa) ── */}
       <div className="signature-left">
-        <img src={cfg.logo} alt={cfg.logoAlt} crossOrigin="anonymous" />
+        <img
+          key={cfg.logo}
+          src={cfg.logo}
+          alt={cfg.logoAlt}
+          crossOrigin="anonymous"
+        />
       </div>
 
       {/* ── Lado direito: Dados (sempre Agritech) ── */}

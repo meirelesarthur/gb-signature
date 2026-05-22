@@ -34,12 +34,11 @@ async function urlToDataURL(path) {
   })
 }
 
-let _cache = null
+/* Busca os assets convertidos em data URL (sem cache persistente —
+   garante que a logo correta é sempre usada no export).             */
 async function loadAssets() {
-  if (_cache) return _cache
   const pairs = await Promise.all(ASSET_PATHS.map(async p => [p, await urlToDataURL(p)]))
-  _cache = Object.fromEntries(pairs)
-  return _cache
+  return Object.fromEntries(pairs)
 }
 
 async function exportSignature(element, filename) {
@@ -113,8 +112,6 @@ export default function App() {
   /* Favicons via preferência do SO */
   useFavicon()
 
-  /* Pré-aquece o cache de assets */
-  useEffect(() => { loadAssets().catch(console.warn) }, [])
 
   /* Calcula a escala do preview: preenche o container e aplica +10.5% (1.3 × 0.85) */
   useEffect(() => {
