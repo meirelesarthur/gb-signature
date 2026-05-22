@@ -118,7 +118,7 @@ export default function App() {
     if (!containerRef.current) return
     const ro = new ResizeObserver(entries => {
       const w = entries[0].contentRect.width
-      if (w > 0) setPreviewScale((w / 337) * 1.271)
+      if (w > 0) setPreviewScale((w / 337) * 0.9)
     })
     ro.observe(containerRef.current)
     return () => ro.disconnect()
